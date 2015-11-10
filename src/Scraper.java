@@ -1,5 +1,9 @@
 import org.json.JSONArray;
 
+import Utils.JSONUtils;
+import Utils.Utils;
+import Utils.WebsiteURLs;
+
 public class Scraper {
 
 	/*
@@ -7,7 +11,7 @@ public class Scraper {
 	 */
 	public Flight scrapeYatra(String origin, String destination, String day, String month, String year) {
 
-		String jsonString = JSONUtils.downloadFromURL(Constants.getYatraURL(origin, destination, day, month, year));
+		String jsonString = JSONUtils.downloadFromURL(WebsiteURLs.getYatraURL(origin, destination, day, month, year));
 
 		try {
 			JSONArray jsonArray = new JSONArray(jsonString);
@@ -17,7 +21,7 @@ public class Scraper {
 			String airLine= jsonArray.getJSONObject(0).getJSONArray("mnArr").getJSONObject(0).getJSONArray("cf")
 					.getJSONObject(0).getString("yan");
 
-			Flight flight = new Flight(Constants.YATRA, airLine, Integer.parseInt(minFare), Utils.convertDateToMillis(day, month,
+			Flight flight = new Flight(WebsiteURLs.YATRA, airLine, Integer.parseInt(minFare), Utils.convertDateToMillis(day, month,
 					year));
 			return flight;
 
