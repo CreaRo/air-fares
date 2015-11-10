@@ -1,6 +1,10 @@
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JSONException {
 
 		String day = "12";
 		String month = "12";
@@ -11,7 +15,15 @@ public class Main {
 		Scraper scraper = new Scraper();
 		Flight minFlightYatra = scraper.scrapeYatra(source, destination, day, month, year);
 
-		System.out.println(minFlightYatra.website + " | " + minFlightYatra.price);
+		/*
+		 * Add all flights with MinPrices to results array
+		 */
+		JSONArray results = new JSONArray();
+		results.put(minFlightYatra.toJsonObject());
+//		results.put(minFlightClearTrip.toJsonObject());
 
+		JSONObject resultsString = new JSONObject().put("results", results).put("date", day + "-" + month + "-" + year);
+
+		System.out.println(resultsString);
 	}
 }

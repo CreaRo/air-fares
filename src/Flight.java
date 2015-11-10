@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 public class Flight {
 
 	long dateOfFlight;
@@ -10,5 +12,18 @@ public class Flight {
 		this.airline = airline;
 		this.dateOfFlight = date;
 		this.price = price;
+	}
+
+	public JSONObject toJsonObject() {
+		JSONObject object = new JSONObject();
+		try {
+			object.put("website", this.website);
+			object.put("price", this.price);
+			object.put("airline", this.airline);
+			object.put("dateOfFlight", this.dateOfFlight);
+			return object;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

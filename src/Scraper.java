@@ -28,6 +28,6 @@ public class Scraper {
 	}
 
 	public void scrapeClearTrip(String origin, String destination, String day, String month, String year) {
-
+		
 	}
 }
